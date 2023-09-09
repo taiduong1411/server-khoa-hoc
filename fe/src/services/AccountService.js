@@ -1,14 +1,14 @@
-import http from '../services/http-common';
+import http from '../http-common';
 
-const url = 'https://course-8xwb.onrender.com/';
+const url = '/account';
 
 class AccountService{
     login(){
-        return http.get(url);
+        return http.get(`${url}/login`);
     }
 
     login(data){
-        return http.post(url, data);
+        return http.post(`${url}/login`, data);
     }
 
     register(){

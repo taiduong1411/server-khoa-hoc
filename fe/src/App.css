@@ -37,11 +37,18 @@
   }
 }
 
-.login{
+.login, .register{
   width: 25%;
-  margin: 15% auto;
   border: 2px solid transparent;
   border-radius: 4px;
   background-color: #ffffff;
   padding: 0 10px;
+}
+
+.login{
+  margin: 15% auto;
+}
+
+.register{
+  margin: 10% auto;
 }
