@@ -10,6 +10,34 @@ const AccountModel = new Schema({
     password: {
         type: String,
         required: true
+    },
+    fullname: {
+        type: String,
+        required: true
+    },
+    dob: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    avatar: {
+        type: String
+    },
+    level: {
+        type: String,
+        default: "1"
+    },
+    course: {
+        type: [String],
+        default: []
+    },
+    verifyAccount: {
+        type: Boolean,
+        default: false
     }
 
 });
