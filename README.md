@@ -1,6 +1,6 @@
 API: https://course-8xwb.onrender.com
-- Login: https://course-8xwb.onrender.com/login
-- Register: https://course-8xwb.onrender.com/register
+- Login: https://course-8xwb.onrender.com/api/account/login
+- Register: https://course-8xwb.onrender.com/api/account/register
 
 
 
