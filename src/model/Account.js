@@ -31,10 +31,6 @@ const AccountModel = new Schema({
         type: String,
         default: "1"
     },
-    course: {
-        type: [String],
-        default: []
-    },
     verifyAccount: {
         type: Boolean,
         default: false

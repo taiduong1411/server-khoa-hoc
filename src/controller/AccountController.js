@@ -1,5 +1,5 @@
 const Account = require('../model/Account');
-
+const service = require('../service/email');
 
 const AccountController = {
     postRegister: async(req, res, next) => {
@@ -33,6 +33,8 @@ const AccountController = {
                     return res.status(300).json({ success: false, msg: 'account not exist' });
                 } else {
                     if (password == account.password) {
+                        req.session.email = account.email;
+                        req.session.level = account.level;
                         return res.status(200).json({ success: true, msg: 'Login success', data: account });
                     } else {
                         return res.status(300).json({ success: false, msg: 'email or password was wrong' });
@@ -43,5 +45,9 @@ const AccountController = {
             return res.status(500).json({ success: false, msg: 'server error' });
         }
     },
+    getVerifyEmail: async(req, res, next) => {
+        service.sendEmail('123', req.session.email)
+    },
+
 }
 module.exports = AccountController;
