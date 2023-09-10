@@ -23,7 +23,8 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: "mongodb://localhost:27017/server-khoa-hoc",
+        // mongoUrl: "mongodb://localhost:27017/server-khoa-hoc",
+        mongoUrl: 'mongodb+srv://taiduong:taiduong1411@taiduong.28espap.mongodb.net/server-khoa-hoc?retryWrites=true&w=majority'
     }),
 }));
 
