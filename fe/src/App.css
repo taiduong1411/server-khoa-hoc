@@ -40,8 +40,8 @@
 .login, .register{
   width: 25%;
   border: 2px solid transparent;
-  border-radius: 4px;
-  background-color: #ffffff;
+  border-radius: 10px;
+  background-color: lightblue;
   padding: 0 10px;
 }
 

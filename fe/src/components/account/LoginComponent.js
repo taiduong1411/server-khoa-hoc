@@ -1,30 +1,29 @@
 import React, {useState} from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-import AccountService from '../services/AccountService';
-import '../App.css';
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import AccountService from '../../services/AccountService';
+import '../../App.css';
 
 export default function LoginComponent(){
   const [account, setAccount] = useState({
-    username: '',
+    email: '',
     password:''
   });
 
-  const [remember, setRemember] = useState(true);
-
   const onFinish = async (values) => {
     AccountService.login(values)
-    .then(res =>{
-      setAccount({
-        username: res.data.username,
-        password: res.data.password
+      .then(res =>{
+        if(res.data.success){
+          setAccount({
+            email: res.data.email,
+            password: res.data.password
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
-      console.log('Login successful!');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  };
+    }
 
   const handleChange = (e) =>{
     const {name, value} = e.target;
@@ -37,19 +36,20 @@ export default function LoginComponent(){
         <Form
       name="normal_login"
       className="login-form"
-      initialValues={remember}
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
+        name="email"
+        rules={[{ required: true, message: 'Please input your email!' },
+        { type: 'email', message: 'Email address must be a valid email address.'}]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} 
-        placeholder="Username" value={account.username} onChange={(e) => handleChange(e)}/>
+        <Input prefix={<MailOutlined className="site-form-item-icon" />} 
+        placeholder="Email" value={account.email} onChange={(e) => handleChange(e)}/>
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: 'Please input your Password!'},
+        { min:6, message: 'Password has minimum length is 6 characters'}]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -58,15 +58,11 @@ export default function LoginComponent(){
           value={account.password} onChange={(e) => handleChange(e)}
         />
       </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox onChange={(e) => setRemember(e.target.value)}>Remember me</Checkbox>
-        </Form.Item>
+      <Form.Item style={{margin:"-20px 0px 10px 0px"}}>
         <a className="login-form-forgot" href="/account/reset-password">
           Forgot password?
         </a>
       </Form.Item>
-
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in

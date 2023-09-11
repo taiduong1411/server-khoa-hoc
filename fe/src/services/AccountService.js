@@ -3,24 +3,12 @@ import http from '../http-common';
 const url = '/account';
 
 class AccountService{
-    login(){
-        return http.get(`${url}/login`);
-    }
-
     login(data){
         return http.post(`${url}/login`, data);
     }
 
-    register(){
-        return http.get(`${url}/register`);
-    }
-
     register(data){
         return http.post(`${url}/register`, data);
-    }
-
-    resetPassword(){
-        return http.get(`${url}/reset-password`);
     }
 
     resetPassword(id, data){
