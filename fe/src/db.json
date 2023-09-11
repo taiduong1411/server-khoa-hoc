@@ -1,0 +1,25 @@
+{
+    "accounts":[
+        {
+            "email":"nguyenvana@gmail.com",
+            "password":"123123",
+            "fullname":"Nguyen Van A",
+            "dob":"14/11/2000",
+            "phone":"0386296244",
+            "avatar":"abc",
+            "level":"1",
+            "course":[],
+            "verifyAccount":false
+        },
+        {
+            "email":"duongtai141120@gmail.com",
+            "password":"123123",
+            "fullname":"Duong Trong Tai",
+            "dob":"14/11/2000",
+            "phone":"0386296248",
+            "avatar":"abc",
+            "level":"1",
+            "verifyAccount":false
+        }
+    ]
+}

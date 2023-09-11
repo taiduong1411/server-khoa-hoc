@@ -2,7 +2,9 @@ import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import LoginComponent from './components/account/LoginComponent';
 import RegisterComponent from './components/account/RegisterComponent';
+import AdminComponent from './components/admin/AdminComponent';
 import './App.css';
+import AccountsComponent from './components/admin/AccountsListComponent';
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
         <Route exact path="/" element={<LoginComponent />} />
         <Route path='/account/login' element={<LoginComponent />} />
         <Route path='/account/register' element={<RegisterComponent/>} />
+        <Route path='/admin' element={<AdminComponent />} />
       </Routes>
     </div>
   );

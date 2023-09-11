@@ -15,11 +15,13 @@ export default function RegisterComponent(){
   const onFinish = (values) => {
     AccountService.register(values)
     .then(res => {
-      console.log(res.data);
       if(res.data.success){
         setAccount({
           email: res.data.data.email,
-          password: res.data.data.password
+          password: res.data.data.password,
+          dob: res.data.data.dob,
+          phone: res.data.data.phone,
+          fullname: res.data.data.fullname
         })
         console.log(res.data);
         nav('/');
