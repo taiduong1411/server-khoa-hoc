@@ -13,16 +13,16 @@ const AccountModel = new Schema({
     },
     fullname: {
         type: String,
-        required: true
+        // required: true
     },
     dob: {
         type: String,
-        required: true
+        // required: true
     },
     phone: {
         type: String,
-        required: true,
-        unique: true
+        // required: true,
+        // unique: true
     },
     avatar: {
         type: String

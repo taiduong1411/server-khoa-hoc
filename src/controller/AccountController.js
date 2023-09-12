@@ -45,9 +45,20 @@ const AccountController = {
             return res.status(500).json({ success: false, msg: 'server error' });
         }
     },
+    getLogout: async(req, res, next) => {
+        try {
+            await req.session.destroy();
+            return res.status(200).json({ success: true, msg: 'Logout success' })
+        } catch (error) {
+            return res.status(500).json({ success: false, msg: 'server error' })
+        }
+    },
     getVerifyEmail: async(req, res, next) => {
         service.sendEmail('123', req.session.email)
     },
+    // postUpdateInformation: async(req,res,next)=> {
+    //     const {email, }
+    // }
 
 }
 module.exports = AccountController;
