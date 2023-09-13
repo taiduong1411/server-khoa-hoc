@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import AccountService from '../../services/AccountService';
 import '../../App.css';
 
 export default function LoginComponent(){
+  const nav = useNavigate();
   const [account, setAccount] = useState({
     email: '',
     password:''
@@ -15,9 +17,21 @@ export default function LoginComponent(){
       .then(res =>{
         if(res.data.success){
           setAccount({
-            email: res.data.email,
-            password: res.data.password
+            email: res.data.data.email,
+            password: res.data.data.password
           });
+          
+          switch(res.data.data.level){
+            case '1':
+              nav('/home');
+              break;
+            case '2':
+              nav('/teacher');
+              break;
+            case '3':
+              nav('/admin');
+              break;
+          }
         }
       })
       .catch(err => {

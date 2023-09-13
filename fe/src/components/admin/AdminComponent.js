@@ -1,72 +1,9 @@
-// import React, { useState } from 'react';
-// import { Menu } from 'antd';
-// import AccountsComponent from './AccountsListComponent';
-// import { Header } from 'antd/es/layout/layout';
-
-// const AdminComponent = () => {
-//   const [selectedMenu, setSelectedMenu] = useState({
-//     'account_list':false,
-//     'teachers':false,
-//     'student_list':false,
-//     'courses':false,
-//   });
-
-//   const onClick = (e) => {
-//     setSelectedMenu(previousState =>{
-//       return {
-//       ...previousState,
-//         [e.key]:true,
-//       };
-//     })
-//   };
-
-//   return (
-//     <div>
-//         <Header>
-
-//         </Header>
-//         <div style={{display: "flex", flexDirection: 'row'}}>
-//             <Menu
-//                 onClick={onClick}
-//                 style={{width: '150', height: '200'}}
-//                 defaultSelectedKeys={['1']}
-//                 defaultOpenKeys={['sub1']}
-//                 mode="inline"
-//                 items={[
-//                     {label: 'Accounts List', key: 'accounts_list',},
-//                     {label:'Teachers List', key: 'teachers'},
-//                     {label: 'Students List', key: 'student_list'},
-//                     {label: 'Courses List', key: 'course_list'},
-//                 ]}
-//             />
-//             <div>
-//               <AccountsComponent/>
-//             </div>
-//         </div>
-//     </div>
-    
-    
-//   );
-// };
-// export default AdminComponent;
-
 import React from 'react';
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
-import AccountsComponent from './AccountsListComponent';
-const { Header, Content, Sider } = Layout;
+import { Layout, Menu, theme} from 'antd';
+import StudentComponent from './StudentComponent';
+
+const { Content, Sider} = Layout;
 const items = [
-  {label: 'Home', key: 'home'},
-  {label:'Accounts', key: 'accounts'},
   {label: 'Teachers', key: 'teachers'},
   {label: 'Students', key: 'students'},
 ];
@@ -102,7 +39,7 @@ const AdminComponent = () => {
             overflow: 'initial',
           }}
         >
-          <AccountsComponent/>
+          <StudentComponent/>
         </Content>
       </Layout>
     </Layout>

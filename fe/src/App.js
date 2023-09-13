@@ -4,7 +4,6 @@ import LoginComponent from './components/account/LoginComponent';
 import RegisterComponent from './components/account/RegisterComponent';
 import AdminComponent from './components/admin/AdminComponent';
 import './App.css';
-import AccountsComponent from './components/admin/AccountsListComponent';
 
 function App() {
   return (
