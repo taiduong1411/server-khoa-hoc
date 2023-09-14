@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {json, useNavigate} from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import AccountService from '../../services/AccountService';
@@ -20,6 +20,8 @@ export default function LoginComponent(){
             email: res.data.data.email,
             password: res.data.data.password
           });
+
+          localStorage.setItem('token', JSON.stringify({'email': res.data.data.email,'level': res.data.data.level}));
           
           switch(res.data.data.level){
             case '1':

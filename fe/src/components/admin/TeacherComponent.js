@@ -8,18 +8,18 @@ import {
     ExclamationCircleOutlined } from '@ant-design/icons';
 import AdminService from '../../services/AdminService';
 
-export default function StudentComponent(){
-    const [students, setStudents] = useState([]);
+const TeacherComponent = () =>{
+    const [teachers, setTeachers] = useState([]);
     const [columns, setColumns] = useState([]);
 
     useEffect(() => {
-        // AdminService.getAllStudents()
+        // AdminService.getAllTeachers()
         // .then(res => {
         //     if(res.data.success){
-        //         const students = res.data.data || [];
-        //         const student = students[0] || {};
+        //         const teachers = res.data.data || [];
+        //         const teacher = teachers[0] || {};
         //         const cols = [];
-        //         for(const key in student){
+        //         for(const key in teacher){
         //             if(key !== '_id' && key !== '__v'){
         //                 cols.push({
         //                     title: key.toLocaleUpperCase(),
@@ -34,24 +34,24 @@ export default function StudentComponent(){
         // .catch(err => {
         //     console.log(err);
         // })
-        setStudents([
+        setTeachers([
             {
-                "email":"nguyenvana@gmail.com",
-                "fullname":"Nguyen Van A",
+                "email":"ngocduong5642@gmail.com",
+                "fullname":"Nguyen Ngoc Duong",
                 "dob":"14/11/2000",
                 "phone":"0386296244",
                 "avatar":"abc",
-                "level":"1",
+                "level":"2",
                 "course":[],
                 "verifyAccount":0
             },
             {
-                "email":"tranvanb@gmail.com",
-                "fullname":"Tran Van B",
+                "email":"phanvanc@gmail.com",
+                "fullname":"Phan Van C",
                 "dob":"10/10/2001",
                 "phone":"0386296265",
                 "avatar":"def",
-                "level":"1",
+                "level":"2",
                 "course":[],
                 "verifyAccount":0
             },
@@ -109,10 +109,10 @@ export default function StudentComponent(){
         <div>
             <Button type='primary' icon={<PlusCircleOutlined/>}
                 style={{margin: '20px 0 10px 0'}}>
-                Add New Student
+                Add New Teacher
             </Button>
             <Space wrap>
-                <Input placeholder='Search for student' 
+                <Input placeholder='Search for teacher' 
                 style={{
                     width: '500px', 
                     marginLeft:'50px', 
@@ -123,7 +123,9 @@ export default function StudentComponent(){
                     borderLeft: 0, 
                     borderRadius: '0 5px 5px 0'}}/>
             </Space>
-            <Table dataSource={students} columns={columns}/>
+            <Table dataSource={teachers} columns={columns}/>
         </div>
     )
 }
+
+export default TeacherComponent;

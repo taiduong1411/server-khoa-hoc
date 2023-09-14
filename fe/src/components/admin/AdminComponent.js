@@ -1,17 +1,20 @@
-import React from 'react';
-import { Layout, Menu, theme} from 'antd';
+import React, {useState} from 'react';
+import { Layout, Menu} from 'antd';
 import StudentComponent from './StudentComponent';
+import TeacherComponent from './TeacherComponent';
 
 const { Content, Sider} = Layout;
 const items = [
-  {label: 'Teachers', key: 'teachers'},
-  {label: 'Students', key: 'students'},
+  {label: 'Teachers', key: '1'},
+  {label: 'Students', key: '2'},
 ];
 
 const AdminComponent = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const [selectedMenu, setSelectedMenu] = useState('1');
+  const handleMenuClick = (e) => {
+    setSelectedMenu(e.key);
+  };
+
   return (
     <Layout hasSider>
       <Sider
@@ -24,8 +27,15 @@ const AdminComponent = () => {
           bottom: 0,
         }}
       >
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} />
+        <div className="demo-logo-vertical">
+          <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="logo" 
+          style={{
+            width: '100%',
+            height: '50px',
+            marginTop: '20px'
+          }} />
+        </div>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedMenu]} items={items} onClick={(e) => handleMenuClick(e)}/>
       </Sider>
       <Layout
         className="site-layout"
@@ -39,7 +49,9 @@ const AdminComponent = () => {
             overflow: 'initial',
           }}
         >
-          <StudentComponent/>
+          {
+            selectedMenu === '1'? <TeacherComponent/> : <StudentComponent/>
+          }
         </Content>
       </Layout>
     </Layout>
