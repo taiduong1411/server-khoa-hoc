@@ -1,22 +1,44 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Layout, Menu} from 'antd';
+import Cookies from 'universal-cookie';
 import StudentComponent from './StudentComponent';
 import TeacherComponent from './TeacherComponent';
+import LoginComponent from '../account/LoginComponent';
 
 const { Content, Sider} = Layout;
-const items = [
-  {label: 'Teachers', key: '1'},
-  {label: 'Students', key: '2'},
-];
+
 
 const AdminComponent = () => {
+  const nav = useNavigate();
+  const cookies = new Cookies();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const items = [
+    {label: 'Teachers', key: '1'},
+    {label: 'Students', key: '2'},
+  ];
+  
+  useEffect(()=>{
+    const token = cookies.get('token');
+    if (!token) {
+      nav('/');
+      setIsLoggedIn(false);
+    }
+    else{
+      setIsLoggedIn(true);
+    }
+  },[]);
+
   const [selectedMenu, setSelectedMenu] = useState('1');
   const handleMenuClick = (e) => {
     setSelectedMenu(e.key);
   };
 
-  return (
-    <Layout hasSider>
+  return(
+    <>
+      {
+      isLoggedIn ? (
+        <Layout hasSider>
       <Sider
         style={{
           overflow: 'auto',
@@ -35,7 +57,9 @@ const AdminComponent = () => {
             marginTop: '20px'
           }} />
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedMenu]} items={items} onClick={(e) => handleMenuClick(e)}/>
+        <Menu theme="dark" mode="inline" 
+        defaultSelectedKeys={[selectedMenu]} items={items} 
+        onClick={(e) => handleMenuClick(e)}/>
       </Sider>
       <Layout
         className="site-layout"
@@ -55,6 +79,9 @@ const AdminComponent = () => {
         </Content>
       </Layout>
     </Layout>
-  );
+      ): <LoginComponent/>
+    } 
+    </>
+  )
 };
 export default AdminComponent;

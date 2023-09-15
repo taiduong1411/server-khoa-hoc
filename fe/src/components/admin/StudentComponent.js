@@ -6,103 +6,62 @@ import {
     DeleteOutlined, 
     PlusCircleOutlined, 
     ExclamationCircleOutlined } from '@ant-design/icons';
-import AdminService from '../../services/AdminService';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+
+const url = 'http://localhost:4000/api/admin';
 
 export default function StudentComponent(){
     const [students, setStudents] = useState([]);
     const [columns, setColumns] = useState([]);
+    const cookie = new Cookies();
+    
 
     useEffect(() => {
-        // AdminService.getAllStudents()
-        // .then(res => {
-        //     if(res.data.success){
-        //         const students = res.data.data || [];
-        //         const student = students[0] || {};
-        //         const cols = [];
-        //         for(const key in student){
-        //             if(key !== '_id' && key !== '__v'){
-        //                 cols.push({
-        //                     title: key.toLocaleUpperCase(),
-        //                     dataIndex: key,
-        //                 });
-        //             }
-        //         }
-        //         setColumns(cols);
-        //         setStudents(res.data.data);
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // })
-        setStudents([
-            {
-                "email":"nguyenvana@gmail.com",
-                "fullname":"Nguyen Van A",
-                "dob":"14/11/2000",
-                "phone":"0386296244",
-                "avatar":"abc",
-                "level":"1",
-                "course":[],
-                "verifyAccount":0
-            },
-            {
-                "email":"tranvanb@gmail.com",
-                "fullname":"Tran Van B",
-                "dob":"10/10/2001",
-                "phone":"0386296265",
-                "avatar":"def",
-                "level":"1",
-                "course":[],
-                "verifyAccount":0
-            },
-        ]);
-        
-        setColumns([
-            {
-                title: 'Email',
-                dataIndex: 'email',
-                key: 'email',
-            },
-            {
-                title: 'Full Name',
-                dataIndex: 'fullname',
-            },
-            {
-                title: 'Date of Birth',
-                dataIndex: 'dob',
-            },
-            {
-                title: 'Phone',
-                dataIndex: 'phone',
-            },
-            {
-                title: 'Avatar',
-                dataIndex: 'avatar',
-            },
-            {
-                title: 'Level',
-                dataIndex: 'level',
-                align: 'center',
-            },
-            {
-                title: 'Verify Account',
-                dataIndex:'verifyAccount',
-                align: 'center',
-            },
-            {
-                title: 'Action',
-                key: 'action',
-                render: (text, record) => (
-                    <Space size='middle'>
-                        <Button icon={<ExclamationCircleOutlined/>}/>
-                        <Button type='primary' icon={<EditOutlined/>}/>
-                        <Button danger icon={<DeleteOutlined/>}/>
-                    </Space>
-                ),
-                align: 'center'
+        const token = cookie.get('token');
+        console.log(token);
+        console.log(typeof token);
+
+        const config = {
+            method: 'GET',
+            url: `${url}/all-student`,
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-            
-        ])
+        }
+        axios(config)
+        .then(res =>{
+            if(res.data.success){
+                const students = res.data.data || [];
+                const student = students[0] || {};
+                const cols = [];
+                for(const key in student){
+                    if(key !== '_id' && key !== '__v'){
+                        cols.push({
+                            title: key.toLocaleUpperCase(),
+                            dataIndex: key,
+                        });
+                    }
+                }
+                cols.push({
+                    title: 'Action',
+                    key: 'action',
+                    render: (text, record) => (
+                        <Space size='middle'>
+                            <Button icon={<ExclamationCircleOutlined/>}/>
+                            <Button type='primary' icon={<EditOutlined/>}/>
+                            <Button danger icon={<DeleteOutlined/>}/>
+                            </Space>
+                    ),
+                    align: 'center'
+                })
+                setColumns(cols);
+                setStudents(res.data.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
     },[]);
 
     return(

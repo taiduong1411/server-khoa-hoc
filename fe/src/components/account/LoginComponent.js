@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import {json, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
+import Cookies from 'universal-cookie';
 import AccountService from '../../services/AccountService';
 import '../../App.css';
 
 export default function LoginComponent(){
+  const cookie = new Cookies();
   const nav = useNavigate();
   const [account, setAccount] = useState({
     email: '',
@@ -20,9 +22,8 @@ export default function LoginComponent(){
             email: res.data.data.email,
             password: res.data.data.password
           });
+          cookie.set('token', res.data.accessToken);
 
-          localStorage.setItem('token', JSON.stringify({'email': res.data.data.email,'level': res.data.data.level}));
-          
           switch(res.data.data.level){
             case '1':
               nav('/home');
