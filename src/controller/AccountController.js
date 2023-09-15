@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Account = require('../model/Account');
 const service = require('../service/email');
 
@@ -33,9 +34,14 @@ const AccountController = {
                     return res.status(300).json({ success: false, msg: 'account not exist' });
                 } else {
                     if (password == account.password) {
-                        req.session.email = account.email;
-                        req.session.level = account.level;
-                        return res.status(200).json({ success: true, msg: 'Login success', data: account });
+                        const token = jwt.sign(
+                            {
+                                email: account.email,
+                                level: account.level
+                            }, 
+                            process.env.SESSION_SECRET, 
+                            {expiresIn: 60*60*24});
+                        return res.status(200).json({ success: true, msg: 'Login success', data: account, accessToken: token});
                     } else {
                         return res.status(300).json({ success: false, msg: 'email or password was wrong' });
                     }
