@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
+import axios from 'axios';
 import Cookies from 'universal-cookie';
-import AccountService from '../../services/AccountService';
 import '../../App.css';
 
-export default function LoginComponent(){
+const url = 'http://localhost:4000/api/account';
+
+const Login = () => {
   const cookie = new Cookies();
   const nav = useNavigate();
   const [account, setAccount] = useState({
@@ -15,7 +17,11 @@ export default function LoginComponent(){
   });
 
   const onFinish = async (values) => {
-    AccountService.login(values)
+    axios({
+      method: 'POST',
+      url: `${url}/login`,
+      data: values
+    })
       .then(res =>{
         if(res.data.success){
           setAccount({
@@ -91,3 +97,5 @@ export default function LoginComponent(){
     </div>
   );
 };
+
+export default Login;

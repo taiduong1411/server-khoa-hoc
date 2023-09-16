@@ -2,17 +2,19 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layout, Menu} from 'antd';
 import Cookies from 'universal-cookie';
-import StudentComponent from './StudentComponent';
-import TeacherComponent from './TeacherComponent';
-import LoginComponent from '../account/LoginComponent';
+//import Student from './Student';
+import Management from './Management';
+import Login from '../account/Login';
 
 const { Content, Sider} = Layout;
 
 
-const AdminComponent = () => {
+const Admin = () => {
   const nav = useNavigate();
   const cookies = new Cookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [target, setTarget] = useState(1);
+
   const items = [
     {label: 'Teachers', key: '1'},
     {label: 'Students', key: '2'},
@@ -32,6 +34,7 @@ const AdminComponent = () => {
   const [selectedMenu, setSelectedMenu] = useState('1');
   const handleMenuClick = (e) => {
     setSelectedMenu(e.key);
+    setTarget(e.key === '1'?1:2);
   };
 
   return(
@@ -73,15 +76,13 @@ const AdminComponent = () => {
             overflow: 'initial',
           }}
         >
-          {
-            selectedMenu === '1'? <TeacherComponent/> : <StudentComponent/>
-          }
+          <Management type={target}/>
         </Content>
       </Layout>
     </Layout>
-      ): <LoginComponent/>
+      ): <Login/>
     } 
     </>
   )
 };
-export default AdminComponent;
+export default Admin;

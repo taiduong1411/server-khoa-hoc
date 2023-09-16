@@ -1,18 +1,18 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
-import LoginComponent from './components/account/LoginComponent';
-import RegisterComponent from './components/account/RegisterComponent';
-import AdminComponent from './components/admin/AdminComponent';
+import Login from './components/account/Login';
+import Register from './components/account/Register';
+import Admin from './components/admin/Admin';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<LoginComponent />} />
-        <Route path='/account/login' element={<LoginComponent />} />
-        <Route path='/account/register' element={<RegisterComponent/>} />
-        <Route path='/admin' element={<AdminComponent />} />
+        <Route exact path="/" element={<Login />} />
+        <Route path='/account/login' element={<Login />} />
+        <Route path='/account/register' element={<Register/>} />
+        <Route path='/admin' element={<Admin />} />
       </Routes>
     </div>
   );

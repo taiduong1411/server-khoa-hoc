@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const url = 'http://localhost:4000/api/admin';
 
-export default function StudentComponent(){
+const Student = () =>{
     const [students, setStudents] = useState([]);
     const [columns, setColumns] = useState([]);
     const cookie = new Cookies();
@@ -19,17 +19,14 @@ export default function StudentComponent(){
 
     useEffect(() => {
         const token = cookie.get('token');
-        console.log(token);
-        console.log(typeof token);
 
-        const config = {
+        axios({
             method: 'GET',
             url: `${url}/all-student`,
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }
-        axios(config)
+        })
         .then(res =>{
             if(res.data.success){
                 const students = res.data.data || [];
@@ -70,19 +67,15 @@ export default function StudentComponent(){
                 style={{margin: '20px 0 10px 0'}}>
                 Add New Student
             </Button>
-            <Space wrap>
-                <Input placeholder='Search for student' 
+            <Input placeholder='Search for student' 
                 style={{
                     width: '500px', 
-                    marginLeft:'50px', 
-                    borderRight: 0}}/>
-                <Button icon={<SearchOutlined />} 
-                style={{
-                    marginLeft: '-20px', 
-                    borderLeft: 0, 
-                    borderRadius: '0 5px 5px 0'}}/>
-            </Space>
+                    marginLeft:'50px'
+                }}
+                prefix={<SearchOutlined/>}/>
             <Table dataSource={students} columns={columns}/>
         </div>
     )
-}
+};
+
+export default Student;

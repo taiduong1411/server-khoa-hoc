@@ -2,10 +2,10 @@ import React, { useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Button,Form,Input} from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import AccountService from '../../services/AccountService';
 import '../../App.css';
+import axios from 'axios';
 
-export default function RegisterComponent(){
+const Register = () =>{
   const nav = useNavigate();
   const [account, setAccount] = useState({
     email: '',
@@ -13,7 +13,11 @@ export default function RegisterComponent(){
   });
 
   const onFinish = (values) => {
-    AccountService.register(values)
+    axios({
+      method: 'POST',
+      url: 'http://localhost:4000/api/account/register',
+      data: values
+    })
     .then(res => {
       if(res.data.success){
         setAccount({
@@ -96,3 +100,5 @@ export default function RegisterComponent(){
     </div>
   );
 };
+
+export default Register;
