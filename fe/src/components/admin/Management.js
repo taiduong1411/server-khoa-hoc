@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Table } from 'antd';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-import Action from '../Action';
-import Header from './Header'
+import Action from '../common/Action';
+import Header from '../common/Header'
 
 const url = 'http://localhost:4000/api/admin';
 
