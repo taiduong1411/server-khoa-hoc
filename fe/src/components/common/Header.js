@@ -6,14 +6,12 @@ const Header = (props) => {
     return (
         <>
             <Button type='primary' icon={<PlusCircleOutlined/>}
-                style={{margin: '20px 0 10px 0'}}>
+                className="btn-add-new">
                 Add New {props.type.toString() === '1' ? 'Teacher': 'Student'}
             </Button>
-            <Input placeholder={props.type.toString() === '1' ? 'Search for teacher' : 'Search for student'} 
-                style={{
-                    width: '500px', 
-                    marginLeft:'50px'
-                }}
+            <Input
+                className="input-search"
+                placeholder={props.type.toString() === '1' ? 'Search for teacher' : 'Search for student'} 
                 prefix={<SearchOutlined/>}
             />
         </>

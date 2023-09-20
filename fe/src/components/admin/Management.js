@@ -27,8 +27,10 @@ const Management = (props) =>{
                 const data = res.data.data || [];
                 const dt = data[0] || {};
                 const cols = [];
+                const colsHiddens = ["_id", "__v", "password", "verifyAccount", "course"]
+
                 for(const key in dt){
-                    if(key !== '_id' && key !== '__v' && key !== 'password'){
+                    if(!colsHiddens.includes(key)){
                         cols.push({
                             title: key.toLocaleUpperCase(),
                             dataIndex: key,

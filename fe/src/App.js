@@ -3,6 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import Login from './components/account/Login';
 import Register from './components/account/Register';
 import Admin from './components/admin/Admin';
+import Home from './components/Home';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route path='/account/login' element={<Login />} />
         <Route path='/account/register' element={<Register/>} />
+        <Route path='/home' element={<Home />} />
         <Route path='/admin' element={<Admin />} />
       </Routes>
     </div>
