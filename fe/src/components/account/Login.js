@@ -2,7 +2,8 @@ import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {
   LockOutlined,
-  MailOutlined
+  MailOutlined,
+  LoginOutlined
 } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
@@ -36,14 +37,14 @@ const Login = () => {
           cookie.set("token", res.data.accessToken);
 
           switch (res.data.data.level) {
-            case "1":
-              nav("/home");
-              break;
             case "2":
               nav("/teacher");
               break;
             case "3":
               nav("/admin");
+              break;
+            default:
+              nav("/home");
               break;
           }
         }
@@ -104,6 +105,7 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            icon = {<LoginOutlined />}
           >
             Log in
           </Button>{" "}
