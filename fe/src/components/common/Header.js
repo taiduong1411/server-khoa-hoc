@@ -1,21 +1,41 @@
-import React from "react";
-import { Button, Input } from "antd";
-import {PlusCircleOutlined, SearchOutlined} from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { Layout, Row, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import Cookies from "universal-cookie";
+import User from "./User";
+import "../../App.css";
 
-const Header = (props) => {
-    return (
-        <>
-            <Button type='primary' icon={<PlusCircleOutlined/>}
-                className="btn-add-new">
-                Add New {props.type.toString() === '1' ? 'Teacher': 'Student'}
-            </Button>
-            <Input
-                className="input-search"
-                placeholder={props.type.toString() === '1' ? 'Search for teacher' : 'Search for student'} 
-                prefix={<SearchOutlined/>}
-            />
-        </>
-    )
-}
+const { Header } = Layout;
 
-export default Header;
+const HeaderLayout = ({ level }) => {
+  const cookies = new Cookies();
+  const user = cookies.get("currentUser");
+  const [isNormalUser, setIsNormalUser] = useState(false);
+
+  useEffect(() => {
+    setIsNormalUser(level.toString() === "1" ? true : false);
+  });
+
+  return (
+    <Header className="headerStyle">
+      <Row>
+        <img
+          className="logoHome"
+          src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+          alt="logo"
+        />
+        <div className="brand">Knowledge Center</div>
+        {isNormalUser && (
+          <Input
+            className="input-search-home"
+            placeholder="Search..."
+            prefix={<SearchOutlined />}
+          />
+        )}
+        <User user={user} />
+      </Row>
+    </Header>
+  );
+};
+
+export default HeaderLayout;

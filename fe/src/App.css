@@ -76,6 +76,7 @@
   left: 0;
   top: 0;
   bottom: 0;
+  background: transparent;
 }
 
 .btn-add-new {
@@ -90,7 +91,7 @@
 .headerStyle {
   color: #000;
   height: 64px;
-  background: "#fff";
+  background: #fff;
 }
 
 .logoHome {
@@ -116,11 +117,12 @@
 
 .sider-home{
   text-align: center;
-  line-height: 120px;
   color: #fff;
-  background-color: #fff;
+  background: transparent;
   width: 100px;
-  height: auto !important;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
 }
 
 .carouselStyle{
@@ -147,15 +149,46 @@
   width: 240px;
   height: 300px;
   margin: 10px 0px 0 20px;
+  position: relative;
 }
 
 .course-price {
+  position: absolute;
   font-weight: bold;
+  bottom: 0;
+  right: 0;
 }
 
 .content-style {
   text-align: center;
   line-height: 120px;
   color: #fff;
-  background-color: #fff;
+  background: #fff;
+}
+
+.course-introductor {
+  text-decoration: underline;
+  font: italic bold;
+}
+
+.course-description {
+  text-wrap: wrap;
+  text-align: left;
+}
+
+.btn-detail-course {
+  position: absolute;
+  margin: -180px -50px;
+  border: 0;
+  display: none;
+}
+
+.card-container:hover .btn-detail-course {
+  opacity: 0.9;
+  display: inline;
+}
+
+.img-detail-course {
+  width: 60%;
+  height: 50%;
 }

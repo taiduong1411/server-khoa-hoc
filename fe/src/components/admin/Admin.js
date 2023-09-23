@@ -4,6 +4,7 @@ import { Layout, Menu } from "antd";
 import Cookies from "universal-cookie";
 import Management from "./Management";
 import Login from "../account/Login";
+import HeaderLayout from "../common/Header";
 import "../../App.css";
 
 const { Content, Sider } = Layout;
@@ -11,12 +12,14 @@ const { Content, Sider } = Layout;
 const Admin = () => {
   const nav = useNavigate();
   const cookies = new Cookies();
+  const currentUser = cookies.get("currentUser");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [target, setTarget] = useState(1);
 
   const items = [
-    { label: "Teachers", key: "1" },
-    { label: "Students", key: "2" },
+    { label: 'Home', key: '1'},
+    { label: "Teachers", key: "2" },
+    { label: "Students", key: "3" },
   ];
 
   useEffect(() => {
@@ -29,33 +32,27 @@ const Admin = () => {
     }
   }, []);
 
-  const [selectedMenu, setSelectedMenu] = useState("1");
+  const [selectedMenu, setSelectedMenu] = useState("2");
   const handleMenuClick = (e) => {
     setSelectedMenu(e.key);
-    setTarget(e.key === "1" ? 1 : 2);
+    e.key == '1' ? nav('/home') : setTarget(e.key == '2'? 2 : 3);
   };
 
   return (
     <>
       {isLoggedIn ? (
-        <Layout hasSider>
-          <Sider className="sider-admin">
-            <div>
-              <img
-                className="logo-admin"
-                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-                alt="logo"
+        <Layout>
+          <HeaderLayout level={currentUser.level} />
+          <Layout hasSider>
+            <Sider className="sider-admin">
+              <Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={[selectedMenu]}
+                items={items}
+                onClick={(e) => handleMenuClick(e)}
               />
-            </div>
-            <Menu
-              theme="dark"
-              mode="inline"
-              defaultSelectedKeys={[selectedMenu]}
-              items={items}
-              onClick={(e) => handleMenuClick(e)}
-            />
-          </Sider>
-          <Layout className="content-layout-admin">
+            </Sider>
             <Content className="content-admin">
               <Management type={target} />
             </Content>

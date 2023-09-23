@@ -28,13 +28,13 @@ const Login = () => {
     })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
-
           setAccount({
             email: res.data.data.email,
             password: res.data.data.password,
           });
+
           cookie.set("token", res.data.accessToken);
+          cookie.set("currentUser", res.data.data);
 
           switch (res.data.data.level) {
             case "2":
